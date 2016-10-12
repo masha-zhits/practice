@@ -1,0 +1,83 @@
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+body {padding: 10px;}
+
+/* img {width: 18px; */
+/* 	height: 18px;} */
+
+.Container li {
+        list-style-type: none; /* убрать кружочки/точечки */
+}
+
+
+/* узел отодвинут от левой стенки контейнера на 18px
+    благодаря этим отступам вложенные узлы формируют иерархию
+ */
+.Node {
+    margin-left: 20px;
+    zoom: 1; /* спецсвойство против багов IE6,7. Ставит hasLayout */
+    /* линия слева образуется повторяющимся фоновым рисунком */
+    background-image : url(img/i.gif);
+    background-position : top left;
+    background-repeat : repeat-y;
+}
+
+
+.Container img {
+    width: 17px;
+    height: 17px;
+    float: left;
+    margin: 2px;
+	cursor: move;        
+}
+
+/* Корневой узел от родительского контейнера не отодвинут. 
+   Ему же не надо демонстрировать отступом, чей он сын.
+   Это правило идет после .Node, поэтому имеет более высокий приоритет 
+   Так что class="Node Main" дает margin-left:0
+*/ 
+.Main {
+    margin-left: 0;
+    background-image : url(img/l.gif);
+     background-repeat: no-repeat;
+}
+
+.End {
+    /* добавить соединительную черточку наверх */
+    background-image: url(img/i_half.gif);
+    background-repeat : no-repeat;
+}
+
+
+
+.Indent {
+    width: 20px;
+    height: 20px;
+    /* принцип двухколоночной верстки. */
+    /* float:left и width дива Indent + margin-left дива Content */
+    float: left; 
+    background-image: url(img/l.gif);  
+   	cursor:move; 
+}
+
+
+/* содержание (заголовок) узла */
+ .Content {
+    /* чтобы не налезать на Indent */
+    margin-left:24px;
+    /* высота заголовка - как минимум равна Indent 
+        Т.е правая колонка всегда выше или равна левой.
+        Иначе нижний float будет пытаться разместиться на получившейся ступеньке
+    */    
+    min-height: 22px; 
+}
+
+.Container {
+	display: block;
+}
+
+
+
